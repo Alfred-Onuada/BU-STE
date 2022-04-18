@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
+
+*, h1, h2, h3, h4, h5, h6{
+  font-family: 'Comfortaa';
+}
+
+.header{
+  border-bottom: 1px solid #0047ab;
+}
+.header-container{
+  display: flex;
+  place-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+.account-info{
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.account-info > h1, .header-container > h1{
+  margin: 0px;
+}
+.title{
+  font-size: 25px;
+  font-weight: normal;
+}
+.login-btn, .logout-btn{
+  background-color: #0047ab;
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+  padding: 5px 30px;
+  margin-left: 40px;
+}

@@ -1,0 +1,19 @@
+<div class="container login-container">
+  <div class="login-border">
+    <h1 class="login-title">Welcome!</h1>
+  
+    <form (submit)="logIn()">
+      <div class="form-group">
+        <label for="email">e-Mail:</label>
+        <input type="email" id="email" placeholder="1234@example.com">
+      </div>
+      <div class="form-group">
+        <label for="password">password:</label>
+        <input type="password" id="password" placeholder="********">
+      </div>
+      <div class="form-group-btn">
+        <button mat-raised-button class="login-btn">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="dashboard">
+    <mat-drawer-container autosize>
+      <mat-drawer #dashboarSideNav mode="side" [opened]="navIsOpen"
+        class="side-nav">
+        <ul type="none" class="nav-items">
+          <li>Home</li>
+          <li>Reports</li>
+          <ul class="sub-nav-items">
+            <!-- build li tags with year 2022 to year 2012 in descending order -->
+            <li *ngFor="let year of [2021, 2022, 2023, 2024, 2025]">
+              {{year}}
+            </li>
+          </ul>
+        </ul>
+      </mat-drawer>
+
+      <div class="content">
+        <div class="charts-and-info">
+          <div class="charts">
+            <!-- chart for total votes year on year -->
+            <canvas baseChart width="100" height="50"
+              [type]="'line'"
+              [legend]="true"
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions">
+            </canvas>
+
+          </div>
+
+          <div class="semester-info">
+            <h1 class="sem-id">Semester ID: 2021/2022.1a</h1>
+            <div class="action-btns">
+              <!-- make a bootstrap button for activate and disable semester evaluation -->
+              <button class="btn btn-success">Activate</button>
+              <button class="btn btn-danger">Disable</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" class="staff-table">
+        
+            <ng-container matColumnDef="serial_no">
+              <th mat-header-cell *matHeaderCellDef>S/N</th>
+              <td mat-cell *matCellDef="let i = index">{{i + 1}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="staff_id">
+              <th mat-header-cell *matHeaderCellDef>Staff ID</th>
+              <td mat-cell *matCellDef="let element"> {{element.staff_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dept">
+              <th mat-header-cell *matHeaderCellDef>Department</th>
+              <td mat-cell *matCellDef="let element"> {{element.dept}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="rating">
+              <th mat-header-cell *matHeaderCellDef>Rating</th>
+              <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="respondents">
+              <th mat-header-cell *matHeaderCellDef>Respondents</th>
+              <td mat-cell *matCellDef="let element"> {{element.respondents}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+            pageSize="10"
+            showFirstLastButtons 
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+        
+      </div>
+    </mat-drawer-container>
+</div>
