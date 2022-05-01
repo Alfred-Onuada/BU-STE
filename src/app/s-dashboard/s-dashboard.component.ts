@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Question } from '../question';
 
 @Component({
   selector: 'se-s-dashboard',
@@ -67,13 +68,126 @@ export class SDashboardComponent implements OnInit {
   course: string = "";
   lecturer: string = "";
 
+  questionsArray: Question[][] = [
+    [
+      {
+        title: "How would you rate the lecturer?",
+        rate: 0,
+      },
+      {
+        title: "How does he handle the class?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's teaching style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's praying style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's dressing style?",
+        rate: 0,
+      },
+    ],
+    [
+      {
+        title: "How would you rate the lecturer?",
+        rate: 0,
+      },
+      {
+        title: "How does he handle the class?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's teaching style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's praying style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's dressing style?",
+        rate: 0,
+      },
+    ],
+    [
+      {
+        title: "How would you rate the lecturer?",
+        rate: 0,
+      },
+      {
+        title: "How does he handle the class?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's teaching style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's praying style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's dressing style?",
+        rate: 0,
+      },
+    ],
+    [
+      {
+        title: "How would you rate the lecturer?",
+        rate: 0,
+      },
+      {
+        title: "How does he handle the class?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's teaching style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's praying style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's dressing style?",
+        rate: 0,
+      },
+    ],
+    [
+      {
+        title: "How would you rate the lecturer?",
+        rate: 0,
+      },
+      {
+        title: "How does he handle the class?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's teaching style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's praying style?",
+        rate: 0,
+      },
+      {
+        title: "How would you rate the lecturer's dressing style?",
+        rate: 0,
+      },
+    ],
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   submitEvaluation(): void {
-
+    console.log(this.questionsArray);
   }
 
   formValueChanged(value: string, property: string): void {    
