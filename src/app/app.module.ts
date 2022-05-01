@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -51,6 +52,7 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
     MatDialogModule,
     MatStepperModule,
     NgbModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

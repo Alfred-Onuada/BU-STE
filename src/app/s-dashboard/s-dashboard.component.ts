@@ -1,6 +1,7 @@
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
 import { Question } from '../question';
 
@@ -69,6 +70,8 @@ export class SDashboardComponent implements OnInit {
 
   course: string = "";
   lecturer: string = "";
+
+  stepper!: MatStepper;
 
   questionsArray: Question[][] = [
     [
@@ -159,35 +162,32 @@ export class SDashboardComponent implements OnInit {
         rate: 0,
       },
     ],
-    [
-      {
-        title: "How would you rate the lecturer?",
-        rate: 0,
-      },
-      {
-        title: "How does he handle the class?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's teaching style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's praying style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's dressing style?",
-        rate: 0,
-      },
-    ],
   ]
+
+  openEndedRemark: string = "";
+  remarkWordCount: number = 0;
+
+  get _openEndedRemark(): string {
+    return this.openEndedRemark;
+  }
+
+  set _openEndedRemark(value: string) {
+    this.openEndedRemark = value;
+  }
 
   constructor(
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+  }
+
+  getWordCount(): void {
+    this.remarkWordCount = this.openEndedRemark.split(" ").length;
+
+    if (this.remarkWordCount > 150) {
+      this.openEndedRemark = this.openEndedRemark.split(" ").slice(0, 150).join(' ');
+    }
   }
 
   getAverageRating(): number {
@@ -201,13 +201,28 @@ export class SDashboardComponent implements OnInit {
   }
 
   submitEvaluation(): void {
-    this.dialog.open(CompletionDialogComponent, {
+    let dialogRef = this.dialog.open(CompletionDialogComponent, {
       width: '500px',
       data: {
         averageRating: this.getAverageRating(),
         lecturer: this.lecturer,
         course: this.course,
         department: this.department,
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.stepper.reset();
+
+      // reset all rating
+      this.lecturer = "";
+      this.course = "";
+      this.openEndedRemark = "";
+      this.remarkWordCount = 0;
+      for (let i = 0; i < this.questionsArray.length; i++) {
+        for (let j = 0; j < this.questionsArray[i].length; j++) {
+          this.questionsArray[i][j].rate = 0;
+        }
       }
     })
   }
