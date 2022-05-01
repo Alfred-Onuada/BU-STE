@@ -2,17 +2,22 @@
   <div class="login-border">
     <h1 class="login-title">Welcome!</h1>
   
-    <form (submit)="logIn()">
+    <form (submit)="login()">
+      <div class="error-container" [@errorAnimation]="error ? 'animate' : 'nothing'">
+        <div class="form-error">
+          <p *ngIf="error">{{error}}</p>
+        </div>
+      </div>
       <div class="form-group">
         <label for="email">e-Mail:</label>
-        <input type="email" id="email" placeholder="1234@example.com">
+        <input (change)="formValueChanged()" [(ngModel)]="email" name="email" type="email" id="email" placeholder="1234@example.com">
       </div>
       <div class="form-group">
         <label for="password">password:</label>
-        <input type="password" id="password" placeholder="********">
+        <input (change)="formValueChanged()" [(ngModel)]="password" name="password" type="password" id="password" placeholder="********">
       </div>
       <div class="form-group-btn">
-        <button mat-raised-button class="login-btn">Login</button>
+        <button mat-raised-button class="login-btn" [disabled]="formIsDisabled">Login</button>
       </div>
     </form>
   </div>

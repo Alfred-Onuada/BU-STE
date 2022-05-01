@@ -1,1 +1,44 @@
-<p>t-dashboard works!</p>
+<div class="container login-container">
+  <div class="login-border">  
+    <form (submit)="getReports()">
+      <div class="error-container" [@errorAnimation]="error ? 'animate' : 'nothing'">
+        <div class="form-error">
+          <p *ngIf="error">{{error}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <mat-label>Level</mat-label>
+          <mat-select name="level" (valueChange)="formValueChanged($event, 'level')">
+            <mat-option *ngFor="let level of levels" [value]="level">
+              {{level}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <mat-label>Department</mat-label>
+          <mat-select name="department" (valueChange)="formValueChanged($event, 'department')">
+            <mat-option *ngFor="let department of departments" [value]="department">
+              {{department}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <mat-label>Course</mat-label>
+          <mat-select name="course" (valueChange)="formValueChanged($event, 'course')">
+            <mat-option *ngFor="let course of courses" [value]="course">
+              {{course}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group-btn">
+        <button mat-raised-button class="login-btn" [disabled]="formIsDisabled">Get Reports</button>
+      </div>
+    </form>
+  </div>
+</div>

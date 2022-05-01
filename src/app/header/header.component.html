@@ -5,10 +5,10 @@
     <div class="account-info" *ngIf="isLoggedIn">
       <h1 class="profile-info">Welcome, {{profileName}}</h1>
       
-      <button mat-raised-button class="logout-btn" (click)="toggleLoginState()" routerLink="login">Logout</button>
+      <button mat-raised-button class="logout-btn" (click)="logout()" routerLink="login">Logout</button>
     </div>
 
-    <button mat-raised-button class="login-btn" *ngIf="!isLoggedIn"
-      routerLink="login" (click)="toggleLoginState()">Login</button>
+    <!-- <button mat-raised-button class="login-btn" *ngIf="!isLoggedIn"
+      routerLink="login" (click)="toggleLoginState()">Login</button> -->
   </div>
 </header>

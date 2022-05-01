@@ -59,3 +59,21 @@ input{
   font-weight: normal;
   padding: 5px 30px;
 }
+.error-container{
+  width: 100%;
+  margin: 20px 0px;
+}
+.form-error{
+  height: 37px;
+  display: flex;
+  place-items: center;
+  background-color: red;
+  color: white;
+  padding: 0px 50px;
+  border-radius: 35px;
+  margin: 0px auto;
+  width: fit-content;
+}
+.form-error > p{
+  margin: 0px;
+}

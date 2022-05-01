@@ -1,1 +1,90 @@
-<p>s-dashboard works!</p>
+<div class="container login-container">
+  <div class="login-border">  
+    <form (submit)="submitEvaluation()">
+      <div class="error-container" [@errorAnimation]="error ? 'animate' : 'nothing'">
+        <div class="form-error">
+          <p *ngIf="error">{{error}}</p>
+        </div>
+      </div>
+
+      <mat-stepper linear #student_stepper>
+        <mat-step [completed]="(department && course && lecturer) ? true : false">
+          <div class="form-group">
+            <mat-form-field class="form-field">
+              <mat-label>Department</mat-label>
+              <mat-select name="department" [disabled]="deptIsDisabled" [value]="department">
+                <mat-option [value]="department">
+                  {{department}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="form-field">
+              <mat-label>Course</mat-label>
+              <mat-select name="course" (valueChange)="formValueChanged($event, 'course')">
+                <mat-option *ngFor="let course of courses" [value]="course">
+                  {{course}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="form-field">
+              <mat-label>Lecturer</mat-label>
+              <mat-select name="lecturer" (valueChange)="formValueChanged($event, 'lecturer')">
+                <mat-option *ngFor="let lecturer of lecturers" [value]="lecturer">
+                  {{lecturer}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperNext>Begin</button>
+          </div>
+        </mat-step>
+        <mat-step >
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperPrevious>Previous</button>
+            <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled"
+              matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step >
+          
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperPrevious>Previous</button>
+            <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled"
+              matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step >
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperPrevious>Previous</button>
+            <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled"
+              matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step >
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperPrevious>Previous</button>
+            <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled"
+              matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <div class="form-group-btn">
+            <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
+              matStepperPrevious>Previous</button>
+            <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled">Submit Evaluation</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
+  </div>
+</div>

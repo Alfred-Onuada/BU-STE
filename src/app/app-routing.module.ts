@@ -7,6 +7,7 @@ import { SDashboardComponent } from './s-dashboard/s-dashboard.component';
 import { TDashboardComponent } from './t-dashboard/t-dashboard.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: ADashboardComponent },
   { path: 'staff', component: TDashboardComponent },

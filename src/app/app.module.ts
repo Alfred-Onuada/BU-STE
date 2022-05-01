@@ -15,6 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper'
 
 @NgModule({
   declarations: [
@@ -23,7 +29,8 @@ import { NgChartsModule } from 'ng2-charts';
     LoginComponent,
     ADashboardComponent,
     SDashboardComponent,
-    TDashboardComponent
+    TDashboardComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,12 @@ import { NgChartsModule } from 'ng2-charts';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
