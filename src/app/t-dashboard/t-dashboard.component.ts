@@ -85,7 +85,7 @@ export class TDashboardComponent implements OnInit {
         level: this.level,
         department: this.department,
         noOfReviews: Math.floor(Math.random() * 10000) + 1,
-        averageRating: Math.random() * 5,
+        averageRating: (Math.random() * 5).toFixed(2),
       }
     })
   }
