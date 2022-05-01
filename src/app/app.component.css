@@ -7,8 +7,12 @@
   display: flex;
   place-content: center;
   place-items: center;
+  flex-direction: column;
 }
 .copyright{
   font-size: 15px;
   margin: 0px 0px 20px 0px;
+}
+.copyright > a{
+  text-decoration: none;
 }
