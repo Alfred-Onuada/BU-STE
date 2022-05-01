@@ -1,5 +1,7 @@
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
 import { Question } from '../question';
 
 @Component({
@@ -181,13 +183,33 @@ export class SDashboardComponent implements OnInit {
     ],
   ]
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
   }
 
+  getAverageRating(): number {
+    let sum = 0;
+    for (let i = 0; i < this.questionsArray.length; i++) {
+      for (let j = 0; j < this.questionsArray[i].length; j++) {
+        sum += this.questionsArray[i][j].rate;
+      }
+    }
+    return sum / (this.questionsArray.length * this.questionsArray[0].length);
+  }
+
   submitEvaluation(): void {
-    console.log(this.questionsArray);
+    this.dialog.open(CompletionDialogComponent, {
+      width: '500px',
+      data: {
+        averageRating: this.getAverageRating(),
+        lecturer: this.lecturer,
+        course: this.course,
+        department: this.department,
+      }
+    })
   }
 
   formValueChanged(value: string, property: string): void {    

@@ -21,7 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     ADashboardComponent,
     SDashboardComponent,
     TDashboardComponent,
-    DialogComponent
+    DialogComponent,
+    CompletionDialogComponent
   ],
   imports: [
     BrowserModule,

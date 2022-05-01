@@ -3,5 +3,5 @@
   <h3><b>Department: </b> {{data.department}}</h3>
   <h3><b>Course: </b> {{data.course}}</h3>
   <h3><b>Respondents: </b> {{data.noOfReviews}}</h3>
-  <h3><b>Rating: </b> {{data.averageRating}} out of 5</h3>
+  <h3><b>Rating: </b> {{data.averageRating}} out of 5 {{ data.averageRating <= 3 ? '😢' : '😎' }}</h3>
 </div>

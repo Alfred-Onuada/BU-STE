@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('email', this.email);
       this.router.navigate(['/student']);
     } else {
-      this.error = "Invalid email or password";
+      this.error = "Invalid email or password 😞😟";
 
       let timeOut = setTimeout(() => {
         this.error = ''
