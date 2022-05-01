@@ -20,7 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatStepperModule } from '@angular/material/stepper'
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MatStepperModule } from '@angular/material/stepper'
     MatSelectModule,
     MatDialogModule,
     MatStepperModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
