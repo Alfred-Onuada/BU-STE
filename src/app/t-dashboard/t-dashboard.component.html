@@ -1,6 +1,6 @@
 <div class="container login-container">
   <div class="login-border">  
-    <form (submit)="getReports()">
+    <form (submit)="getReports()" class="staff-form">
       <div class="error-container" [@errorAnimation]="error ? 'animate' : 'nothing'">
         <div class="form-error">
           <p *ngIf="error">{{error}}</p>

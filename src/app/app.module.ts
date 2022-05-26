@@ -23,7 +23,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component'
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
     MatDialogModule,
     MatStepperModule,
     NgbModule,
-    MatInputModule
+    MatInputModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

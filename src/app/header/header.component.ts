@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'se-header',
@@ -9,6 +10,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = true;
+  isMobile: boolean = window.innerWidth < 768 ? true : false;
+
+  // logout icon from font awesome
+  logoutIcon = faSignOutAlt;
 
   profileName: string = "";
   
@@ -28,6 +33,14 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
+  }
+
+  checkIfMobile(): void {
+    if (window.innerWidth < 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
   logout() : void {

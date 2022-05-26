@@ -10,11 +10,11 @@
       </div>
       <div class="form-group">
         <label for="email">e-Mail:</label>
-        <input (change)="formValueChanged()" [(ngModel)]="email" name="email" type="email" id="email" placeholder="1234@example.com">
+        <input (change)="formValueChanged()" [(ngModel)]="email" name="email" type="email" id="email" placeholder="1234@example.com" autocomplete="email">
       </div>
       <div class="form-group">
         <label for="password">password:</label>
-        <input (change)="formValueChanged()" [(ngModel)]="password" name="password" type="password" id="password" placeholder="********">
+        <input (change)="formValueChanged()" [(ngModel)]="password" name="password" type="password" id="password" placeholder="********" autocomplete="password">
       </div>
       <div class="form-group-btn">
         <button mat-raised-button class="login-btn" [disabled]="formIsDisabled">Login</button>

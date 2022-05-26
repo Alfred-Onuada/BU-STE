@@ -8,7 +8,7 @@
   display: flex;
   place-content: center;
   place-items: center;
-  height: calc(100vh - 70px);
+  margin: 40px 0px;
   flex-direction: column;
   min-width: 100%;
 }
@@ -38,15 +38,6 @@
   margin: 20px 0px;
   padding: 0px 30px;
 }
-label{
-  min-width: 100px;
-  font-size: 20px;
-}
-input{
-  height: 40px;
-  width: 400px;
-  padding: 0px 10px;
-}
 .login-btn{
   background-color: #0047ab;
   color: #fff;
@@ -74,4 +65,60 @@ input{
 }
 .form-field{
   width: 535px;
+}
+
+/* Tablet CSS */
+@media only screen and (max-width: 1024px) {
+  .login-container{
+    margin: 60px 0px;
+  }
+  .login-border{
+    max-width: 95vw;
+    height: 700px;
+  }
+  .stepper{
+    width: 90vw;
+  }
+  .form-field{
+    font-size: 20px;
+  }
+  .form-group{
+    width: 100%;
+  }
+  .form-group-questions > label {
+    font-size: 18px;
+  }
+  .form-group-btn{
+    padding: 0px 10px;
+  }
+}
+
+/* Mobile CSS */
+@media only screen and (max-width: 768px) {
+  .login-container{
+    margin: 30px 0px;
+  }
+  .login-border{
+    max-width: 95vw;
+    min-height: 500px;
+    height: fit-content;
+    padding: 10px;
+  }
+  .form-field{
+    font-size: 16px;
+    max-width: 95%;
+  }
+  .form-group{
+    width: 100%;
+  } 
+  .form-group-btn{
+    width: 100%;
+  }
+  .login-btn{
+    padding: 5px 15px;
+    font-size: 15px;
+  }
+  .staff-form{
+    width: 100%;
+  }
 }

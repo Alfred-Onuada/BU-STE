@@ -77,3 +77,95 @@ input{
 .form-error > p{
   margin: 0px;
 }
+
+/* Tablet CSS */
+@media only screen and (max-width: 1024px) {
+  .login-container{
+    height: calc(100vh - 250px);
+  }
+  .login-border{
+    padding: 10px 20px;
+    width: 80%;
+    height: 75%;
+    margin: 0px;
+  }
+  .login-title{
+    font-size: 60px;
+    margin-bottom: 40px;
+  }
+  .form-group{
+    width: 600px;
+  }
+  .form-group-btn{
+    width: 590px;
+    padding: 0px 20px;
+  }
+  label{
+    min-width: 120px;
+    font-size: 24px;
+  }
+  input{
+    height: 50px;
+    width: 380px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 18px;
+  }
+  .login-btn{
+    font-size: 18px;
+  }
+  .error-container{
+    margin: 0px 0px 40px 0px
+  }
+  .form-error{
+    height: 50px;
+  }
+  .form-error > p{
+    font-size: 18px;
+  }
+}
+
+/* Mobile CSS */
+@media only screen and (max-width: 768px) {
+  .login-container{
+    height: calc(100vh - 200px);
+  }
+  .login-border{
+    padding: 30px 20px;
+    width: 98%;
+  }
+  .login-title{
+    font-size: 30px;
+    margin: 25px 0px 10px 0px;
+  }
+  .form-group{
+    width: 300px;
+    margin: 30px 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group-btn{
+    width: 320px;
+    padding: 0px 20px;
+  }
+  label{
+    min-width: 80px;
+    font-size: 15px;
+    margin: 0px 0px 10px 0px;
+  }
+  input{
+    height: 50px;
+    width: 95%;
+  }
+  .login-btn{
+    font-size: 18px;
+  }
+  .form-error{
+    height: 47px;
+    width: 95%;
+    padding: 0px 25px;
+  }
+  .form-error > p{
+    font-size: 15px;
+  }
+}
