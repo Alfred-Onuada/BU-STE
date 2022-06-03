@@ -1,9 +1,9 @@
 <header class="header">
   <div class="container header-container">
-    <h1 class="title" routerLink="/">BU-STE</h1>
+    <h1 class="title" routerLink="/"><span class="blue">BABCOCK</span> <span class="gold">UNIVERSITY</span></h1>
 
     <div class="account-info" *ngIf="isLoggedIn">
-      <h1 class="profile-info">Welcome, {{profileName}}</h1>
+      <!-- <h1 class="profile-info">Welcome, {{profileName}}</h1> -->
       
       <button (window:resize)="checkIfMobile()" mat-raised-button 
         class="logout-btn" (click)="logout()" routerLink="login">

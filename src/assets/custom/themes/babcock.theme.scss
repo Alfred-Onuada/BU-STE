@@ -1,0 +1,108 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$fp-palette-primary: (
+  50: #e0e7f3,
+  100: #b3c3e0,
+  200: #809ccc,
+  300: #4d74b7,
+  400: #2656a7,
+  500: #003898,
+  600: #003290,
+  700: #002b85,
+  800: #00247b,
+  900: #00176a,
+  A100: #99a7ff,
+  A200: #667aff,
+  A400: #334eff,
+  A700: #1a38ff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$fp-palette-accent: (
+  50: #f7f2e9,
+  100: #ecdfc8,
+  200: #dfcaa4,
+  300: #d2b580,
+  400: #c8a564,
+  500: #be9549,
+  600: #b88d42,
+  700: #af8239,
+  800: #a77831,
+  900: #996721,
+  A100: #ffecd5,
+  A200: #ffd6a2,
+  A400: #ffbf6f,
+  A700: #ffb456,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$fp-palette-warn: (
+  50: #ea8b8b,
+  100: #e67575,
+  200: #e26060,
+  300: #de4a4a,
+  400: #da3535,
+  500: #cf2626,
+  600: #b92222,
+  700: #a41e1e,
+  800: #8e1a1a,
+  900: #791616,
+  A100: #eea0a0,
+  A200: #f2b6b6,
+  A400: #f6cbcb,
+  A700: #631212,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$fp-theme-primary: mat.define-palette($fp-palette-primary);
+$fp-theme-accent: mat.define-palette($fp-palette-accent, A200, A100, A400);
+$fp-theme-warn: mat.define-palette($fp-palette-warn, A200, A100, A400);
+
+$fp-theme: mat.define-light-theme((
+  color: (
+    primary: $fp-theme-primary,
+    accent: $fp-theme-accent,
+    warn: $fp-theme-warn,
+  )
+));
+
+// injects theme into the component
+@include mat.core-theme($fp-theme);
+
+// injects theme to all components but will lead to unneccasry css as such try to correct this later
+@include mat.all-component-themes($fp-theme);
