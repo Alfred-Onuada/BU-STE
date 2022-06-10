@@ -1,4 +1,4 @@
-export interface CompletionDialogData {
+export interface ICompletionDialogData {
   lecturer: string;
   course: string;
   department: string;

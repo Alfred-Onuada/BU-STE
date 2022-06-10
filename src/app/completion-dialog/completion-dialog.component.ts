@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CompletionDialogData } from '../completion-dialog-data';
+import { ICompletionDialogData } from '../interfaces/completion-dialog-data';
 
 @Component({
   selector: 'se-completion-dialog',
@@ -11,7 +11,7 @@ export class CompletionDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CompletionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CompletionDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: ICompletionDialogData,
   ) { }
   
   ngOnInit(): void {

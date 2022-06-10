@@ -1,5 +1,7 @@
 <div class="container login-container">
   <div class="login-border">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading" class="loading"></mat-progress-bar>
+
     <h1 class="login-title">Welcome!</h1>
   
     <form (submit)="login()">
@@ -9,15 +11,17 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="email">e-Mail:</label>
-        <input (change)="formValueChanged()" [(ngModel)]="email" name="email" type="email" id="email" placeholder="1234@example.com" autocomplete="email">
+        <label for="email">e-Mail/Matric No:</label>
+        <input [(ngModel)]="username" name="username" type="text"
+          placeholder="1234@example.com" autocomplete="email">
       </div>
       <div class="form-group">
         <label for="password">password:</label>
-        <input (change)="formValueChanged()" [(ngModel)]="password" name="password" type="password" id="password" placeholder="********" autocomplete="password">
+        <input [(ngModel)]="password" name="password" type="password"
+          placeholder="********" autocomplete="password">
       </div>
       <div class="form-group-btn">
-        <button mat-raised-button class="login-btn" [disabled]="formIsDisabled">Login</button>
+        <button mat-raised-button class="login-btn">Login</button>
       </div>
     </form>
   </div>

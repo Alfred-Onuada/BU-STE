@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../dialog-data';
+import { IDialogData } from '../interfaces/dialog-data';
 
 @Component({
   selector: 'se-dialog',
@@ -11,7 +11,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
   ) { }
 
   ngOnInit(): void {

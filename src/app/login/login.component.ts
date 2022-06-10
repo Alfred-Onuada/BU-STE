@@ -1,6 +1,8 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from '../interfaces/user';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'se-login',
@@ -38,17 +40,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  email: string = '';
+  username: string = '';
   password: string = '';
-  formIsDisabled: string = 'true';
   error: string = '';
+  loading: boolean = false;
 
-  get _email(): string {
-    return this.email;
+  get _username(): string {
+    return this.username;
   }
 
-  set _email(value: string) {
-    this.email = value;
+  set _username(value: string) {
+    this.username = value;
   }
 
   get _password(): string {
@@ -59,16 +61,9 @@ export class LoginComponent implements OnInit {
     this.password = value;
   }
 
-  formValueChanged(): void {
-    if (this.email && this.password) {
-      this.formIsDisabled = 'false';
-    } else {
-      this.formIsDisabled = 'true';
-    }
-  }
-
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -76,26 +71,46 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.error = "";
+    this.loading = true;
 
-    localStorage.setItem('isLoggedIn', 'true');
-
-    if (this.email === 'admin@bu.com') {
-      localStorage.setItem('email', this.email);
-      this.router.navigate(['/admin']);
-    } else if (this.email === 'staff@bu.com') {
-      localStorage.setItem('email', this.email);
-      this.router.navigate(['/staff']);
-    } else if (this.email === 'student@bu.com') {
-      localStorage.setItem('email', this.email);
-      this.router.navigate(['/student']);
-    } else {
-      this.error = "Invalid email or password 😞😟";
-
-      let timeOut = setTimeout(() => {
-        this.error = ''
-        clearTimeout(timeOut);
-      }, 5000);
+    if (this.username === "" || this.password === "") {
+      this.error = "Please enter your email/matric number and password";
+      return;
     }
+
+    this.authService.login(this.username, this.password).subscribe({
+      next: (data: IUser) => { 
+        switch (data.role) {
+          case 'student':
+            this.router.navigate(['/student']);
+            break;
+
+          case 'staff':
+            this.router.navigate(['/staff']);
+            break;
+
+          case 'admin':
+            this.router.navigate(['/admin']);
+            break;
+        
+          default:
+            this.error = "Invalid credentials";
+            break;
+        }  
+      },
+      error: (error: Error) => {
+        this.error = error.message;
+        this.loading = false;
+
+        setTimeout(() => {
+          this.error = "";
+        }, 5000);
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
+
   }
 
 }

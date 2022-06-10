@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'se-header',
@@ -14,23 +15,18 @@ export class HeaderComponent implements OnInit {
 
   // logout icon from font awesome
   logoutIcon = faSignOutAlt;
-
-  profileName: string = "";
   
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void { 
 
     // listen on navigation and toggle isLoggedIn according to what is in localstorage
-
     this.router.events.subscribe(event => {
-      if (localStorage.getItem('isLoggedIn') === 'true') {
-        this.isLoggedIn = true;
-        this.profileName = localStorage.getItem('email') || "";
-      } else {
-        this.isLoggedIn = false;
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn = this.authService.isLoggedIn();
       }
     });
   }
@@ -44,9 +40,10 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() : void {
-    this.isLoggedIn = false;
+    this.authService.logout();
+    this.router.navigate(['/login']);
 
-    localStorage.setItem('isLoggedIn', 'false');
+    this.isLoggedIn = false;
   }
 
 }

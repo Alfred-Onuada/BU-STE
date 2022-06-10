@@ -1,4 +1,4 @@
-export interface DialogData {
+export interface IDialogData {
   course: string;
   level: string;
   department: string;

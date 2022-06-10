@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
-import { Question } from '../question';
+import { IQuestion } from '../interfaces/question';
 
 @Component({
   selector: 'se-s-dashboard',
@@ -73,7 +73,7 @@ export class SDashboardComponent implements OnInit {
 
   stepper!: MatStepper;
 
-  questionsArray: Question[][] = [
+  questionsArray: IQuestion[][] = [
     [
       {
         title: "How would you rate the lecturer?",

@@ -22,6 +22,12 @@
   flex-direction: column;
   border-radius: 5px;
   background: #ffff;
+  position: relative;
+}
+.loading{
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
 }
 .login-title{
   font-size: 45px;
