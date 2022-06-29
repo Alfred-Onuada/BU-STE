@@ -1,5 +1,7 @@
 <div class="container login-container">
   <div class="login-border">  
+    <mat-progress-bar mode="indeterminate" *ngIf="loading" class="loading"></mat-progress-bar>
+
     <form (submit)="submitEvaluation()">
       <div class="error-container" [@errorAnimation]="error? 'animate' : 'nothing'">
         <div class="form-error">
@@ -8,6 +10,7 @@
       </div>
 
       <mat-stepper linear #student_stepper class="stepper">
+        <!-- Department, Course & lecturer -->
         <mat-step [completed]="(department && course && lecturer) ? true : false">
           <div class="form-group">
             <mat-form-field class="form-field">
@@ -41,13 +44,16 @@
           </div>
           <div class="form-group-btn">
             <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
-              type="button" matStepperNext>Begin</button>
+              type="button" matStepperNext (click)="getQuestions(1)">Begin</button>
           </div>
         </mat-step>
-        <mat-step *ngFor="let questions of questionsArray, let questionGroup = index">
-          <div class="form-group-questions" *ngFor="let question of questions, let questionNo = index">
+        
+        <!-- Questions -->
+        <mat-step *ngFor="let section of sectionsArray, let sectionGroup = index">
+          <h2 class="section-title">{{section.title}}</h2>
+          <div class="form-group-questions" *ngFor="let question of questionsArray[section.id - 1], let questionNo = index">
             <label for="question.title">{{questionNo + 1}}. {{question.title}}</label>
-            <ngb-rating [max]="5" [readonly]="false" [(rate)]="question.rate">
+            <ngb-rating [max]="5" [readonly]="false" [(rate)]="question.score">
               <!-- provides custom layout -->
               <ng-template let-fill="fill" let-index="index">
                 <span class="star" [class.filled]="fill === 100" [class.bad]="index <= 1" 
@@ -62,9 +68,11 @@
             <button mat-raised-button class="login-btn" [disabled]="formIsDisabled"
               type="button" matStepperPrevious>Previous</button>
             <button mat-raised-button class="login-btn next-btn" [disabled]="formIsDisabled"
-              type="button" matStepperNext>Next</button>
+              type="button" matStepperNext (click)="getQuestions(section.id + 1)">Next</button>
           </div>
         </mat-step>
+
+        <!-- Open Ended Remark -->
         <mat-step>
           <div class="form-group-questions">
             <label for="openEndedQuestions">Kindly leave any final remarks about {{lecturer}}</label>

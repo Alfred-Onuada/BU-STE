@@ -1,4 +1,5 @@
 export interface IQuestion {
+  id: number
   title: string;
-  rate: number;
+  score: number;
 }

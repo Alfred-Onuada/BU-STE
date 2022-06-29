@@ -2,8 +2,11 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
+import { Subscription } from 'rxjs';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
 import { IQuestion } from '../interfaces/question';
+import { ISections } from '../interfaces/sections';
+import { QuestionsService } from '../services/questions.service';
 
 @Component({
   selector: 'se-s-dashboard',
@@ -46,8 +49,15 @@ export class SDashboardComponent implements OnInit {
   department: string = "Software Engineering";
   readonly deptIsDisabled: boolean = true;
   readonly isLinear: boolean = true;
-
   formIsDisabled: string = 'true';
+  stepper!: MatStepper;
+  loading: boolean = false;
+
+  sectionsSub$!: Subscription;
+  questionsSub$!: Subscription;
+
+  course: string = "";
+  lecturer: string = "";
 
   courses: string[] = [
     'Angular',
@@ -68,101 +78,8 @@ export class SDashboardComponent implements OnInit {
     "Prof. Jane Adamu"
   ]
 
-  course: string = "";
-  lecturer: string = "";
-
-  stepper!: MatStepper;
-
-  questionsArray: IQuestion[][] = [
-    [
-      {
-        title: "How would you rate the lecturer?",
-        rate: 0,
-      },
-      {
-        title: "How does he handle the class?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's teaching style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's praying style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's dressing style?",
-        rate: 0,
-      },
-    ],
-    [
-      {
-        title: "How would you rate the lecturer?",
-        rate: 0,
-      },
-      {
-        title: "How does he handle the class?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's teaching style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's praying style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's dressing style?",
-        rate: 0,
-      },
-    ],
-    [
-      {
-        title: "How would you rate the lecturer?",
-        rate: 0,
-      },
-      {
-        title: "How does he handle the class?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's teaching style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's praying style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's dressing style?",
-        rate: 0,
-      },
-    ],
-    [
-      {
-        title: "How would you rate the lecturer?",
-        rate: 0,
-      },
-      {
-        title: "How does he handle the class?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's teaching style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's praying style?",
-        rate: 0,
-      },
-      {
-        title: "How would you rate the lecturer's dressing style?",
-        rate: 0,
-      },
-    ],
-  ]
+  questionsArray: IQuestion[][] = []
+  sectionsArray: ISections[] = [];
 
   openEndedRemark: string = "";
   remarkWordCount: number = 0;
@@ -176,10 +93,40 @@ export class SDashboardComponent implements OnInit {
   }
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private questionsService: QuestionsService
   ) { }
 
   ngOnInit(): void {
+    this.sectionsSub$ = this.questionsService.getSections().subscribe({
+      next: (data) => { 
+        this.sectionsArray = data;
+      },
+      error: () => {
+        this.error = "There was an error retrieving the questions, please try again";
+      }
+    })
+  }
+
+  getQuestions(sectionId: number): void {
+    this.loading = true;
+
+    this.questionsSub$ = this.questionsService.getQuestionsForSection(sectionId).subscribe({
+      next: (data) => {
+        this.questionsArray.push(data);
+      },
+      error: (error: Error) => {
+        this.error = error.message;
+        this.loading = false;
+
+        setTimeout(() => {
+          this.error = "";
+        }, 5000);
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    })
   }
 
   getWordCount(): void {
@@ -190,21 +137,25 @@ export class SDashboardComponent implements OnInit {
     }
   }
 
+  // 
   getAverageRating(): number {
     let sum = 0;
+    let noOfQuestions = 0;
     for (let i = 0; i < this.questionsArray.length; i++) {
       for (let j = 0; j < this.questionsArray[i].length; j++) {
-        sum += this.questionsArray[i][j].rate;
+        sum += this.questionsArray[i][j].score;
       }
+      noOfQuestions += this.questionsArray[i].length;
     }
-    return sum / (this.questionsArray.length * this.questionsArray[0].length);
+    return sum / noOfQuestions;
   }
 
+  // 
   submitEvaluation(): void {
     let dialogRef = this.dialog.open(CompletionDialogComponent, {
       width: '500px',
       data: {
-        averageRating: this.getAverageRating(),
+        averageRating: this.getAverageRating().toFixed(2),
         lecturer: this.lecturer,
         course: this.course,
         department: this.department,
@@ -221,7 +172,7 @@ export class SDashboardComponent implements OnInit {
       this.remarkWordCount = 0;
       for (let i = 0; i < this.questionsArray.length; i++) {
         for (let j = 0; j < this.questionsArray[i].length; j++) {
-          this.questionsArray[i][j].rate = 0;
+          this.questionsArray[i][j].score = 0;
         }
       }
     })

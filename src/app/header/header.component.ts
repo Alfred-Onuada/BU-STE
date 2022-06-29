@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
   isMobile: boolean = window.innerWidth < 768 ? true : false;
 
   // logout icon from font awesome
