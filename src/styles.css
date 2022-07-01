@@ -2,3 +2,8 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; }
+
+/* this class is generated automatically */
+.mat-horizontal-stepper-header-container{
+  overflow: hidden;
+}
