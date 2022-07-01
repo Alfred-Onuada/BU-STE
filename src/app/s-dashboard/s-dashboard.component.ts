@@ -99,23 +99,49 @@ export class SDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.sectionsSub$ = this.questionsService.getSections().subscribe({
-      next: (data) => { 
+      next: (data) => {
         this.sectionsArray = data;
       },
       error: () => {
+        window.scroll(0, 0);
+
         this.error = "There was an error retrieving the questions, please try again";
       }
     })
   }
 
+  formValueChanged(value: string, property: string): void {    
+    if (property === 'course') {
+      this.course = value;
+    } else if (property === 'lecturer') {
+      this.lecturer = value;
+    }
+
+    if (this.course && this.lecturer && this.department) {
+      this.formIsDisabled = 'false';
+    } else {
+      this.formIsDisabled = 'true';
+    }
+  }
+
   getQuestions(sectionId: number): void {
+    // this questions already exists useful for backward and forward movements
+    if (this.questionsArray[sectionId - 1] && this.questionsArray[sectionId - 1].length) {
+      return;
+    }
+
     this.loading = true;
 
     this.questionsSub$ = this.questionsService.getQuestionsForSection(sectionId).subscribe({
       next: (data) => {
+        if (data.length == 0) {
+          return;
+        }
+        
         this.questionsArray.push(data);
       },
-      error: (error: Error) => {
+      error: (error) => {
+        window.scroll(0, 0);
         this.error = error.message;
         this.loading = false;
 
@@ -129,6 +155,23 @@ export class SDashboardComponent implements OnInit {
     })
   }
 
+  updateSectionState(sectionId: number): void {
+    let isComplete: boolean = this.questionsArray[sectionId - 1].find(question => question.score == 0) == undefined;
+
+    this.sectionsArray[sectionId - 1].completed = isComplete;
+  };
+
+  isComplete(sectionId: number): void {
+    if (!this.sectionsArray[sectionId - 1].completed) {
+      window.scroll(0, 0);
+      this.error = "Please provide answers to all questions🥺🥺";
+
+      setTimeout(() => {
+        this.error = "";
+      }, 5000);
+    }
+  }
+
   getWordCount(): void {
     this.remarkWordCount = this.openEndedRemark.split(" ").length;
 
@@ -137,7 +180,6 @@ export class SDashboardComponent implements OnInit {
     }
   }
 
-  // 
   getAverageRating(): number {
     let sum = 0;
     let noOfQuestions = 0;
@@ -150,8 +192,13 @@ export class SDashboardComponent implements OnInit {
     return sum / noOfQuestions;
   }
 
-  // 
   submitEvaluation(): void {
+    let finalEvaluations = {
+      ratings: this.questionsArray,
+      staff_id: this.lecturer,
+      course_id: this.course
+    }
+
     let dialogRef = this.dialog.open(CompletionDialogComponent, {
       width: '500px',
       data: {
@@ -175,20 +222,10 @@ export class SDashboardComponent implements OnInit {
           this.questionsArray[i][j].score = 0;
         }
       }
+
+      for (let i = 0; i < this.sectionsArray.length; i++) {
+        this.sectionsArray[i].completed = false;
+      }
     })
-  }
-
-  formValueChanged(value: string, property: string): void {    
-    if (property === 'course') {
-      this.course = value;
-    } else if (property === 'lecturer') {
-      this.lecturer = value;
-    }
-
-    if (this.course && this.lecturer && this.department) {
-      this.formIsDisabled = 'false';
-    } else {
-      this.formIsDisabled = 'true';
-    }
   }
 }

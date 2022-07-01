@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, Subscription, throwError } from 'rxjs';
 import { IQuestion } from '../interfaces/question';
 import { AuthService } from './auth.service';
 
@@ -8,7 +8,8 @@ interface sections {
   id: number,
   title: string,
   rate_min: number,
-  rate_max: number
+  rate_max: number,
+  completed: boolean;
 }
 
 @Injectable({
@@ -17,6 +18,8 @@ interface sections {
 export class QuestionsService {
 
   private sectionsUrl = 'https://streapi.babcock.edu.ng/api/sections';
+
+  private questionsSub$!: Subscription;
 
   constructor(
     private http: HttpClient,
@@ -35,6 +38,13 @@ export class QuestionsService {
         }
       }
     ).pipe(
+      map((sections: sections[]) => {
+        sections.map((section) => {
+          section.completed = false;
+        })
+        
+        return sections
+      }),
       catchError(this.handleError)
     )
   }
@@ -51,6 +61,14 @@ export class QuestionsService {
         }
       }
     ).pipe(
+      map((questions: IQuestion[]) => {
+
+        questions.map((question: IQuestion) => {
+          question.score = 0;
+        })
+
+        return questions;
+      }),
       catchError(this.handleError)
     )
   }
@@ -63,7 +81,6 @@ export class QuestionsService {
       errorMsg = "Somthing went wrong on our end, please try again later";
     } else {
       errorMsg = error.error.error;
-
     }
 
     return throwError(() => new Error(errorMsg))
