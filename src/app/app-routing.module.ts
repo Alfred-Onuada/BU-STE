@@ -12,15 +12,15 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { 
     path: 'admin', component: ADashboardComponent, 
-    canActivate: [RoleGuard], data: { expectedRole: 'admin' }
+    // canActivate: [RoleGuard], data: { expectedRole: 'admin' }
   },
   { 
     path: 'staff', component: TDashboardComponent,
-    canActivate: [RoleGuard], data: { expectedRole: 'staff' } 
+    // canActivate: [RoleGuard], data: { expectedRole: 'staff' } 
   },
   { 
     path: 'student', component: SDashboardComponent,
-    canActivate: [RoleGuard], data: { expectedRole: 'student' } 
+    // canActivate: [RoleGuard], data: { expectedRole: 'student' } 
   },
   
 ];

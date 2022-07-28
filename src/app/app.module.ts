@@ -26,7 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { HttpClientModule } from '@angular/common/http';
-import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [

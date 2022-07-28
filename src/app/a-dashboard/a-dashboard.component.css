@@ -3,73 +3,38 @@
 *, h1, h2, h3, h4, h5, h6{
   font-family: 'Comfortaa';
 }
-
 body{
   overflow: hidden;
   max-width: 100%;
   max-height: 100%;
 }
-
 .dashboard{
   width: 100%;
   height: fit-content;
   max-width: 100%;
   max-height: calc(100% - 71px);
-  overflow-x: hidden;
+  height: calc(100% - 71px);
+  position: relative;
 }
-.side-nav{
-  width: 15%;
-  height: 100vh;
-  background-color: #0047ab;
+.sidenav-content{
+  margin: 20px 0px 10px 0px;
 }
-.content{
-  min-width: 85%;
-  height: 100vh;
-  padding: 10px 10px 0px 10px;
-  background-color: #FFFF;
-}
-li{
-  color: #fff;
-  margin: 20px 0px;
-  font-weight: 300;
-}
-.nav-items > li{
-  font-size: 18px;
-}
-.sub-nav-items > li{
-  font-size: 16px;
-}
-.charts-and-info{
+.quick-glance{
   display: flex;
+  flex-direction: row;
+  place-items: center;
 }
-.semester-info{
-  display: flex;
-  flex-direction: column;
-  place-items: flex-end;
-  margin-right: 20px;
+.metric{
+  width: 22.5%;
+  margin: 0px 1.25%;
+  height: 230px;
+  border-radius: 5px;
 }
-.sem-id{
-  font-size: 18px;
-  color: black;
+.metric:nth-child(even) {
+  box-shadow: 5px 5px 5px 5px #be9549;
+  border: 2px solid #be9549;
 }
-.action-btns{
-  display: flex;
-  width: 220px;
-  place-content: flex-end;
-  justify-content: space-between;
-}
-.staff-table{
-  width: 100%;
-  height: fit-content;
-  margin-top: 20px;
-}
-.charts{
-  height: 300px;
-  width: 75%;
-  margin-right: 30px;
-}
-
-canvas{
-  height: 300px !important;
-  width: 100% !important;
+.metric:nth-child(odd){
+  box-shadow: 0px 0px 15px 2px #003898;
+  border: 1px solid #003898;
 }
