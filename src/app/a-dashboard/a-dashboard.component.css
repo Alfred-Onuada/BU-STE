@@ -12,17 +12,23 @@ body{
   width: 100%;
   height: fit-content;
   max-width: 100%;
-  max-height: calc(100% - 71px);
-  height: calc(100% - 71px);
+  max-height: calc(100vh - 71px);
+  height: calc(100vh - 71px);
   position: relative;
 }
-.sidenav-content{
-  margin: 20px 0px 10px 0px;
+.sidenav-container{
+  max-width: 100%;
+  height: 100%;
+}
+.sidenav{
+  border-right: 1px solid rgb(220 220 220);
+  height: calc(100vh - 71px);
 }
 .quick-glance{
   display: flex;
   flex-direction: row;
   place-items: center;
+  margin: 20px 0px 10px 0px;
 }
 .metric{
   width: 22.5%;
@@ -31,10 +37,51 @@ body{
   border-radius: 5px;
 }
 .metric:nth-child(even) {
-  box-shadow: 5px 5px 5px 5px #be9549;
   border: 2px solid #be9549;
 }
 .metric:nth-child(odd){
-  box-shadow: 0px 0px 15px 2px #003898;
   border: 1px solid #003898;
+}
+.teacher-edge{
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.teacher-edge > .title{
+  font-size: 16px;
+  margin: 2.5px 0px;
+}
+.teacher-average{
+  font-size: 16px;
+  margin: 2.5px 0px;
+}
+.teacher-image{
+  height: 160px;
+  width: 98%;
+}
+.teacher-image > img{
+  height: 100%;
+  width: 100%;
+}
+.end-eval, .start-eval{
+  color: white;
+}
+.end-eval{
+  background-color: red;
+}
+.start-eval{
+  background-color: green;
+}
+.evaluation-details{
+  margin: 15px 0px;
+}
+.recent-evaluations{
+  width: 100%;
+}
+.recent-evaluations > table{
+  width: 100%;
+}
+.recent-evaluations > .title{
+  text-align: center;
+  font-weight: bold;
 }
