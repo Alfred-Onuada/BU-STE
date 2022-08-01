@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
+
+*, h1, h4{
+  font-family: 'Comfortaa';
+}
+.main-title{
+  font-size: 16px;
+  margin: 0px 0px 10px 0px;
+}
+.input-container{
+  width: 100%;
+}
+.action-buttons{
+  display: flex;
+  width: 100%;
+  place-content: flex-end;
+}
+.action-buttons > button{
+  margin: 10px 0px 0px 15px;
+}
+.error-text{
+  color: red;
+  margin: 5px 0px;
+}

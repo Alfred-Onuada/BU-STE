@@ -85,3 +85,51 @@ body{
   text-align: center;
   font-weight: bold;
 }
+.sidenav-options{
+  display: flex;
+  flex-direction: row;
+  margin: 30px 0px;
+}
+.sidenav-options > .icon{
+  margin-right: 15px;
+  font-size: 20px;
+  color: #be9549;
+}
+.sidenav-options:hover{
+  cursor: pointer;
+}
+.sidenav-options > .title{
+  margin: 0px;
+  font-size: 16px;
+}
+.sections-and-questions-title{
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0px 10px 0px;
+}
+.expansion-panel{
+  margin: 0px 0px 10px 0px;
+}
+.edit{
+  color: #003898;
+}
+.delete{
+  color: red;
+}
+.question-title{
+  margin: 0px;
+  font-size: 16px;
+  max-width: 90%;
+  height: fit-content;
+}
+.question-actions{
+  position: absolute;
+  right: 0px;
+}
+.question-actions > .icon{
+  margin: 0px 0px 0px 15px;
+}
+.question-list{
+  height: fit-content !important;
+  min-height: 40px;
+}

@@ -1,0 +1,14 @@
+<form onsubmit="return false" class="edit-form">
+  <h1 class="main-title">Update the title for this {{data.title}}:</h1>
+  <mat-form-field class="input-container" appearance="fill">
+    <mat-label class="title">New Title</mat-label>
+    <input matInput placeholder="Ex. Class handling techniques" 
+      [(ngModel)]="title" name="newTitle">
+  </mat-form-field>
+  <h4 class="error-text" *ngIf="error">{{error}}</h4>
+
+  <div class="action-buttons">
+    <button mat-raised-button color="primary" (click)="saveTitle()">Save</button>
+    <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  </div>
+</form>

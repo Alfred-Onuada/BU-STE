@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
+
+*, h2{
+  font-family: 'Comfortaa';
+}
+.dialog-content{
+  display: flex;
+  place-content: center;
+  place-items: center;
+  flex-direction: column;
+}
+.action-buttons{
+  margin: 20px 0px;
+}
+button{
+  margin: 0px 15px;
+}

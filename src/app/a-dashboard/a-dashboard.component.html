@@ -1,74 +1,133 @@
 <div class="dashboard">
   <div class="sidenav-container row">
     <div class="sidenav col-md-2">
-
+      <ul type="none">
+        <li (click)="switch('dashboard')">
+          <div class="sidenav-options">
+            <fa-icon class="icon" [icon]="faHouse"></fa-icon>
+            <h4 class="title">Dashboard</h4>
+          </div>
+        </li>
+        <li (click)="switch('update')">
+          <div class="sidenav-options">
+            <fa-icon class="icon" [icon]="faUpdate"></fa-icon>
+            <h4 class="title">Edit Sections</h4>
+          </div>
+        </li>
+        <li (click)="switch('reports')">
+          <div class="sidenav-options">
+            <fa-icon class="icon" [icon]="faReports"></fa-icon>
+            <h4 class="title">Generate Reports</h4>
+          </div>
+        </li>
+      </ul>
     </div>
+
     <div class="sidenav-content col-md-10">
-      <div class="quick-glance">
-        <div class="metric"></div>
-        <div class="metric"></div>
-        <div class="metric">
-          <div class="teacher-edge">
-            <h3 class="title">Best lecturer</h3>
-            <div class="teacher-image">
-              <img src="assets/fav-teacher.jpg" alt="">
+      <div *ngIf="activeMenu == 'dashboard'">
+        <div class="quick-glance">
+          <div class="metric"></div>
+          <div class="metric"></div>
+          <div class="metric">
+            <div class="teacher-edge">
+              <h3 class="title">Best lecturer</h3>
+              <div class="teacher-image">
+                <img src="assets/fav-teacher.jpg" alt="">
+              </div>
+              <h3 class="teacher-average">4.76 average out of {{'5105' | number}}</h3>
             </div>
-            <h3 class="teacher-average">4.76 average out of {{'5105' | number}}</h3>
+          </div>
+          <div class="metric">
+            <div class="teacher-edge">
+              <h3 class="title">Worst lecturer</h3>
+              <div class="teacher-image">
+                <img src="assets/worst-teacher.jpg" alt="">
+              </div>
+              <h3 class="teacher-average">1.65 average out of {{'4312' | number}}</h3>
+            </div>
           </div>
         </div>
-        <div class="metric">
-          <div class="teacher-edge">
-            <h3 class="title">Worst lecturer</h3>
-            <div class="teacher-image">
-              <img src="assets/worst-teacher.jpg" alt="">
-            </div>
-            <h3 class="teacher-average">1.65 average out of {{'4312' | number}}</h3>
+  
+        <div class="row evaluation-details">
+          <div class="col-md-6">
+            <h3 class="semester-title">2022/2023 Summer Semester</h3>
+          </div>
+          <div class="col-md-6">
+            <button mat-raised-button [ngClass]="evaluationIsActive ? 'end-eval' : 'start-eval'" 
+              (click)="evaluationAction()">{{evaluationIsActive ? 'End Evaluation' : 'Start Evaluation'}}</button>
           </div>
         </div>
-      </div>
-
-      <div class="row evaluation-details">
-        <div class="col-md-6">
-          <h3 class="semester-title">2022/2023 Summer Semester</h3>
+  
+        <div class="recent-evaluations">
+          <h1 class="title">Recent Evaluations</h1>
+          <table mat-table [dataSource]="recentEvaluations">
+  
+            <!-- Lecturer's Name Column -->
+            <ng-container matColumnDef="lecturer">
+              <th mat-header-cell *matHeaderCellDef> Lecturer's Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.lecturer}} </td>
+            </ng-container>
+  
+            <!-- Score Column -->
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef> Score </th>
+              <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+            </ng-container>
+  
+            <!-- Course Column -->
+            <ng-container matColumnDef="course">
+              <th mat-header-cell *matHeaderCellDef> Course </th>
+              <td mat-cell *matCellDef="let element"> {{element.course}} </td>
+            </ng-container>
+  
+            <!-- Level Column -->
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef> Level </th>
+              <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+          </table>
         </div>
-        <div class="col-md-6">
-          <button mat-raised-button [ngClass]="evaluationIsActive ? 'end-eval' : 'start-eval'" 
-            (click)="evaluationAction()">{{evaluationIsActive ? 'End Evaluation' : 'Start Evaluation'}}</button>
-        </div>
       </div>
 
-      <div class="recent-evaluations">
-        <h1 class="title">Recent Evaluations</h1>
-        <table mat-table [dataSource]="recentEvaluations">
+      <div *ngIf="activeMenu == 'update'">
+        <h1 class="sections-and-questions-title">Go ahead and review the available sections and questions before starting the evaluation</h1>
 
-          <!-- Lecturer's Name Column -->
-          <ng-container matColumnDef="lecturer">
-            <th mat-header-cell *matHeaderCellDef> Lecturer's Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.lecturer}} </td>
-          </ng-container>
+        <mat-expansion-panel class="expansion-panel" *ngFor="let section of sections">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{section.title}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-          <!-- Score Column -->
-          <ng-container matColumnDef="score">
-            <th mat-header-cell *matHeaderCellDef> Score </th>
-            <td mat-cell *matCellDef="let element"> {{element.score}} </td>
-          </ng-container>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let question of questions[section.id - 1], let i = index"
+              class="question-list">
+              <h3 class="question-title"><b>{{i + 1}}.</b> {{question.title}}</h3>
 
-          <!-- Course Column -->
-          <ng-container matColumnDef="course">
-            <th mat-header-cell *matHeaderCellDef> Course </th>
-            <td mat-cell *matCellDef="let element"> {{element.course}} </td>
-          </ng-container>
+              <div class="question-actions">
+                <fa-icon class="icon edit" [icon]="faEdit" 
+                  (click)="editDialog(question.id, 'question', section.id - 1)"></fa-icon>
+                <fa-icon class="icon delete" [icon]="faDelete" 
+                  (click)="deleteDialog(question.id, 'question', section.id - 1)"></fa-icon>
+              </div>
+            </mat-list-item>
+          </mat-list>
 
-          <!-- Level Column -->
-          <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef> Level </th>
-            <td mat-cell *matCellDef="let element"> {{element.level}} </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
-        </table>
+          <mat-action-row>
+            <button mat-button color="primary" (click)="editDialog(section.id, 'section', null)">
+              Edit Section
+            </button>
+            <button mat-button color="primary" (click)="deleteDialog(section.id, 'section', null)">
+              Delete Section
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
       </div>
+
+      <div *ngIf="activeMenu == 'reports'"></div>
     </div>
   </div>
 </div>

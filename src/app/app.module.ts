@@ -27,6 +27,10 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     SDashboardComponent,
     TDashboardComponent,
     DialogComponent,
-    CompletionDialogComponent
+    CompletionDialogComponent,
+    DeleteConfirmationDialogComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     FontAwesomeModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatExpansionModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
