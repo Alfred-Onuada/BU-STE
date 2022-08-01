@@ -12,6 +12,8 @@ import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog
 import { IDeleteDialogData } from '../interfaces/delete-dialog-data';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { IUpdateDialogData } from '../interfaces/update-dialog-data';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { IAddDialogData } from '../interfaces/add-dialog-data';
 
 @Component({
   selector: 'se-a-dashboard',
@@ -117,6 +119,40 @@ export class ADashboardComponent implements OnInit {
 
   deleteQuestion(id: number, type: string, sectionId: number): void {
     this.questions[sectionId] = this.questions[sectionId].filter(question => question.id != id);
+  }
+
+  addQuestionOrSection(type: string, sectionId: number | null): void {
+    console.log(type, sectionId);
+    let dialogRef = this.dialog.open(AddDialogComponent, {
+      width: '500px',
+      data: {
+        type,
+        sectionId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((data: IAddDialogData) => {
+      if (data.type == 'question') {
+        if (typeof this.questions[data.sectionId] == 'undefined') {
+          this.questions.push([])
+        }
+
+        this.questions[data.sectionId].push({
+          id: this.questions[data.sectionId].length,
+          title: data.title,
+          score: 0,
+          section_id: data.sectionId
+        })
+      } else if (data.type == 'section') {
+        this.sections.push({
+          completed: false,
+          id: this.sections.length + 1,
+          rate_max: 100,
+          rate_min: 0,
+          title: data.title
+        })
+      }
+    })
   }
 
   populateEvaluations(): void {

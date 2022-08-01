@@ -114,6 +114,10 @@
                   (click)="deleteDialog(question.id, 'question', section.id - 1)"></fa-icon>
               </div>
             </mat-list-item>
+
+            <div class="add-button-container">
+              <button mat-raised-button color="primary" (click)="addQuestionOrSection('question', section.id - 1)">Add question</button>
+            </div>
           </mat-list>
 
           <mat-action-row>
@@ -125,6 +129,10 @@
             </button>
           </mat-action-row>
         </mat-expansion-panel>
+
+        <div class="add-button-container" style="margin-bottom: 20px;">
+          <button mat-raised-button color="primary" (click)="addQuestionOrSection('section', null)">Add section</button>
+        </div>
       </div>
 
       <div *ngIf="activeMenu == 'reports'"></div>

@@ -31,6 +31,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { MatListModule } from '@angular/material/list';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatListModule } from '@angular/material/list';
     DialogComponent,
     CompletionDialogComponent,
     DeleteConfirmationDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    AddDialogComponent
   ],
   imports: [
     BrowserModule,

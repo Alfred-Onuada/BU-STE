@@ -133,3 +133,8 @@ body{
   height: fit-content !important;
   min-height: 40px;
 }
+.add-button-container{
+  display: flex;
+  place-content: flex-end;
+  width: 100%;
+}
