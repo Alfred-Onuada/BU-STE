@@ -75,6 +75,19 @@ body{
 .evaluation-details{
   margin: 15px 0px;
 }
+.evaluation-details > .title {
+  text-align: center;
+  font-weight: bold;
+}
+.semester-title{
+  margin: 0px;
+}
+.semester-row{
+  min-height: 35px;
+  margin: 5px 0px;
+  display: flex;
+  place-items: center;
+}
 .recent-evaluations{
   width: 100%;
 }
@@ -137,4 +150,11 @@ body{
   display: flex;
   place-content: flex-end;
   width: 100%;
+}
+.charts-container{
+  height: 100%;
+}
+.charts-container > canvas{
+  height: 100% !important;
+  width: 100% !important;
 }

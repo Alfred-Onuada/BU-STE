@@ -26,8 +26,18 @@
     <div class="sidenav-content col-md-10">
       <div *ngIf="activeMenu == 'dashboard'">
         <div class="quick-glance">
-          <div class="metric"></div>
-          <div class="metric"></div>
+          <div class="metric">
+            <div class="charts-container">
+              <canvas baseChart [data]="studentsToEvaluationRatio"
+                type="doughnut" [options]="studentsToEvaluationRatioOptions"></canvas>
+            </div>
+          </div>
+          <div class="metric">
+            <div class="charts-container">
+              <canvas baseChart [data]="aboverAverageRatio"
+                type="doughnut" [options]="aboveAverageRatioOptions"></canvas>
+            </div>
+          </div>
           <div class="metric">
             <div class="teacher-edge">
               <h3 class="title">Best lecturer</h3>
@@ -49,12 +59,15 @@
         </div>
   
         <div class="row evaluation-details">
-          <div class="col-md-6">
-            <h3 class="semester-title">2022/2023 Summer Semester</h3>
-          </div>
-          <div class="col-md-6">
-            <button mat-raised-button [ngClass]="evaluationIsActive ? 'end-eval' : 'start-eval'" 
-              (click)="evaluationAction()">{{evaluationIsActive ? 'End Evaluation' : 'Start Evaluation'}}</button>
+          <h1 class="title">Active Semesters</h1>
+          <div class="row semester-row" *ngFor="let semester of semesters">
+            <div class="col-md-6">
+              <h3 class="semester-title">{{semester.title}}</h3>
+            </div>
+            <div class="col-md-6">
+              <button mat-raised-button [ngClass]="semester.evaluationIsActive ? 'end-eval' : 'start-eval'" 
+                (click)="evaluationAction(semester.id - 1)">{{semester.evaluationIsActive ? 'End Evaluation' : 'Start Evaluation'}}</button>
+            </div>
           </div>
         </div>
   
