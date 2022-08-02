@@ -5,8 +5,14 @@
     <div class="account-info" *ngIf="isLoggedIn">      
       <button (window:resize)="checkIfMobile()" mat-raised-button 
         class="logout-btn" (click)="logout()" routerLink="login">
-        <fa-icon *ngIf="isMobile" [icon]="logoutIcon"></fa-icon>
+        <fa-icon *ngIf="isMobile" [icon]="logoutIcon" class="logout-icon"></fa-icon>
         <span *ngIf="!isMobile">Logout</span>
+      </button>
+
+      <button mat-button *ngIf="isMobile && (isAdminPage | async)"
+        (click)="showNav()">
+        <fa-icon class="nav-icon" [icon]="hamburgerIcon" *ngIf="navIsClosed"></fa-icon>
+        <fa-icon class="nav-icon" [icon]="closeIcon" *ngIf="!navIsClosed"></fa-icon>
       </button>
     </div>
   </div>

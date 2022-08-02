@@ -100,6 +100,10 @@ export class SDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.sectionsSub$ = this.questionsService.getSections().subscribe({
       next: (data) => {
+        // this adds a section id to each one, it adds one to mimic the human idea of index 1 to n not 0 to n
+        data.forEach((d, i) => d.id = i + 1);
+        data.pop(); // removes the just testing section
+
         this.sectionsArray = data;
       },
       error: () => {

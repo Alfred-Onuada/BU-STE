@@ -1,6 +1,6 @@
 <div class="dashboard">
   <div class="sidenav-container row">
-    <div class="sidenav col-md-2">
+    <div class="sidenav col-lg-2 col-md-1" [ngClass]="isMobile ? [navIsClosed ? 'sidenav-inactive' : 'sidenav-active'] : ''">
       <ul type="none">
         <li (click)="switch('dashboard')">
           <div class="sidenav-options">
@@ -23,7 +23,7 @@
       </ul>
     </div>
 
-    <div class="sidenav-content col-md-10">
+    <div class="sidenav-content col-lg-10 col-md-11">
       <div *ngIf="activeMenu == 'dashboard'">
         <div class="quick-glance">
           <div class="metric">
@@ -126,6 +126,7 @@
                 <fa-icon class="icon delete" [icon]="faDelete" 
                   (click)="deleteDialog(question.id, 'question', section.id - 1)"></fa-icon>
               </div>
+
             </mat-list-item>
 
             <div class="add-button-container">
@@ -148,7 +149,9 @@
         </div>
       </div>
 
-      <div *ngIf="activeMenu == 'reports'"></div>
+      <div *ngIf="activeMenu == 'reports'">
+        Not sure what to show you here at the moment
+      </div>
     </div>
   </div>
 </div>

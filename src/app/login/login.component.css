@@ -23,6 +23,7 @@
   border-radius: 5px;
   background: #ffff;
   position: relative;
+  height: fit-content;
 }
 .loading{
   position: absolute;
@@ -68,9 +69,11 @@ input{
 .error-container{
   width: 100%;
   margin: 20px 0px;
+  height: fit-content;
 }
 .form-error{
-  height: 37px;
+  min-height: 37px;
+  height: fit-content;
   display: flex;
   place-items: center;
   background-color: red;
@@ -92,8 +95,9 @@ input{
   .login-border{
     padding: 10px 20px;
     width: 80%;
-    height: 75%;
+    min-height: 75%;
     margin: 0px;
+    height: fit-content;
   }
   .login-title{
     font-size: 60px;
@@ -124,7 +128,8 @@ input{
     margin: 0px 0px 40px 0px
   }
   .form-error{
-    height: 50px;
+    min-height: 50px;
+    height: fit-content;
   }
   .form-error > p{
     font-size: 18px;
@@ -167,7 +172,8 @@ input{
     font-size: 18px;
   }
   .form-error{
-    height: 47px;
+    min-height: 47px;
+    height: fit-content;
     width: 95%;
     padding: 0px 25px;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { IEvaluation } from '../interfaces/evaluation';
 import { name, commerce } from 'faker';
@@ -16,6 +16,7 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { IAddDialogData } from '../interfaces/add-dialog-data';
 import { Chart, ChartData, ChartOptions } from 'chart.js';
 import { ISemester } from '../interfaces/semester';
+import { SharedNavService } from '../services/nav.service';
 
 @Component({
   selector: 'se-a-dashboard',
@@ -26,8 +27,14 @@ export class ADashboardComponent implements OnInit {
   
   constructor(
     private questionService: QuestionsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private navService: SharedNavService
   ) {}
+
+  // this is quite a confusing bunch but it's correct you can break it down if you wish
+  private readonly chartRadius: number = window.innerWidth >= 1500 ? 110 : window.innerWidth >= 1200 ? 85 : window.innerHeight >= 1024 ? 120 : 120;
+  isMobile: boolean = window.innerWidth <= 768;
+  navIsClosed: boolean = true;
 
   sidenavIsOpen: boolean = true;
   canClose: boolean = false;
@@ -49,19 +56,20 @@ export class ADashboardComponent implements OnInit {
   ]
   interval: any;
 
-  chartOptions: ChartOptions<'doughnut'> | any = {
+  chartOptions: ChartOptions<'doughnut'> = {
     cutout: '80%',
-    radius: 110,
+    radius: this.chartRadius,
     plugins: {
       legend: {
         labels: {
           boxHeight: 10,
           boxWidth: 10,
-          boxPadding: 0
+          boxPadding: 0,
         },
         position: 'bottom'
       },
     },
+    responsive: true
   }
 
   aboveAverageRatioOptions: ChartOptions<'doughnut'> | any = {
@@ -69,7 +77,7 @@ export class ADashboardComponent implements OnInit {
     elements: {
       center: {
         text: '7,611 evaluations',
-        chartRadius: 110
+        chartRadius: this.chartRadius
       }
     }
   }
@@ -90,12 +98,12 @@ export class ADashboardComponent implements OnInit {
     elements: {
       center: {
         text: '12,852 students',
-        chartRadius: 110
+        chartRadius: this.chartRadius
       }
     }
   }
   studentsToEvaluationRatio: ChartData<'doughnut'> = {
-    labels: ["Evaluations Completed", "Remaining"],
+    labels: ["Completed", "Remaining"],
     datasets: [
       {
         data: [7611, 5241],
@@ -201,6 +209,9 @@ export class ADashboardComponent implements OnInit {
         }
       },
     })
+
+    // updates the nav bar to either close or open
+    this.navService.getState().subscribe(state => this.navIsClosed = state);
   }
 
   deleteSection(id: number): void {
@@ -340,5 +351,10 @@ export class ADashboardComponent implements OnInit {
 
   switch(section: string): void {
     this.activeMenu = section;
+
+    // this will be useful on mobile
+    if (this.isMobile) {
+      this.navService.setState(true);
+    }
   }
 }

@@ -6,6 +6,11 @@
 
 .header{
   border-bottom: 1px solid #0047ab;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #ffff;
 }
 .header-container{
   display: flex;
@@ -55,5 +60,14 @@
 @media only screen and (max-width: 425px) {
   .title{
     font-size: 17px;
+  }
+  .logout-btn{
+    padding: 5px 0px;
+  }
+  .nav-icon{
+    font-size: 30px;
+  }
+  .logout-icon{
+    font-size: 20px;
   }
 }

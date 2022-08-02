@@ -10,10 +10,9 @@ body{
 }
 .dashboard{
   width: 100%;
-  height: fit-content;
   max-width: 100%;
-  max-height: calc(100vh - 71px);
-  height: calc(100vh - 71px);
+  min-height: calc(100vh - 71px);
+  height: fit-content;
   position: relative;
 }
 .sidenav-container{
@@ -23,12 +22,15 @@ body{
 .sidenav{
   border-right: 1px solid rgb(220 220 220);
   height: calc(100vh - 71px);
+  position: sticky;
+  top: 71px;
 }
 .quick-glance{
   display: flex;
   flex-direction: row;
   place-items: center;
   margin: 20px 0px 10px 0px;
+  flex-wrap: wrap;
 }
 .metric{
   width: 22.5%;
@@ -145,6 +147,7 @@ body{
 .question-list{
   height: fit-content !important;
   min-height: 40px;
+  margin: 10px 0px;
 }
 .add-button-container{
   display: flex;
@@ -157,4 +160,59 @@ body{
 .charts-container > canvas{
   height: 100% !important;
   width: 100% !important;
+}
+
+/* Tablet CSS */
+@media only screen and (max-width: 1024px) {
+  .sidenav-options > .title{
+    display: none;
+  }
+  .sidenav > ul{
+    padding: 0px 15px;
+  }
+  .metric{
+    min-width: 45%;
+    margin: 10px 2.5%;
+  }
+}
+
+/* Mobile CSS */
+@media only screen and (max-width: 768px) {
+  .sidenav-active{
+    position: absolute;
+    top: 0;
+    background-color: white;
+    width: 80%;
+  }
+  .sidenav-inactive{
+    position: absolute;
+    top: 0;
+    background-color: white;
+    width: 80%;
+    transform: translateX(-100%);
+  }
+  .sidenav{
+    transition: all .5s;
+    z-index: 10;
+  }
+  .sidenav-options > .title{
+    display: block;
+  }
+  .sidenav-container{
+    margin: 0;
+  }
+  .sidenav-content{
+    width: 100%;
+    padding: 0;
+  }
+  .quick-glance{
+    margin: 0px 0px 10px 0px;
+  }
+  .metric{
+    min-width: 90%;
+    margin: 10px 5%;
+  }
+  .expansion-panel{
+    margin: 10px 5px;
+  }
 }

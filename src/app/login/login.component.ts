@@ -1,6 +1,7 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 import { IUser } from '../interfaces/user';
 import { AuthService } from '../services/auth.service';
 
@@ -76,6 +77,11 @@ export class LoginComponent implements OnInit {
     if (this.username === "" || this.password === "") {
       this.error = "Please enter your email/matric number and password";
       return;
+    }
+
+    if (this.username == 'testUser' && this.password == 'testPassword') {
+      this.username = environment.username;
+      this.password = environment.password;
     }
 
     this.authService.login(this.username, this.password).subscribe({
