@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   error: string = '';
   loading: boolean = false;
+  showPassword: boolean = false;
 
   get _username(): string {
     return this.username;
@@ -70,6 +71,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+  showPasswordFunc(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+
   login(): void {
     this.error = "";
     this.loading = true;
@@ -79,9 +86,42 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    // delete this
     if (this.username == 'testUser' && this.password == 'testPassword') {
-      this.username = environment.username;
-      this.password = environment.password;
+      this.authService.login(environment.username, environment.password).subscribe({
+        next: (data: IUser) => { 
+          switch (data.role) {
+            case 'student':
+              this.router.navigate(['/student']);
+              break;
+  
+            case 'staff':
+              this.router.navigate(['/staff']);
+              break;
+  
+            case 'admin':
+              this.router.navigate(['/admin']);
+              break;
+          
+            default:
+              this.error = "Invalid credentials";
+              break;
+          }  
+        },
+        error: (error: Error) => {
+          this.error = error.message;
+          this.loading = false;
+  
+          setTimeout(() => {
+            this.error = "";
+          }, 5000);
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
+
+      return;
     }
 
     this.authService.login(this.username, this.password).subscribe({

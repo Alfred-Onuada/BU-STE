@@ -17,8 +17,11 @@
       </div>
       <div class="form-group">
         <label for="password">password:</label>
-        <input [(ngModel)]="password" name="password" type="password"
+        <input [(ngModel)]="password" name="password" [type]="showPassword == true ? 'text' : 'password'"
           placeholder="********" autocomplete="password">
+      </div>
+      <div class="form-group-btn">
+        <button mat-button (click)="showPasswordFunc()" type="button">{{showPassword == true ? 'Hide' : 'Show'}} Password</button>
       </div>
       <div class="form-group-btn">
         <button mat-raised-button class="login-btn">Login</button>

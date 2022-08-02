@@ -43,6 +43,13 @@
   justify-content: space-evenly;
   margin: 20px 0px;
 }
+.show-password-btn{
+  margin: 5px 0px;
+  width: 600px;
+  display: flex;
+  place-content: flex-end;
+  padding: 0px 30px;
+}
 .form-group-btn{
   width: 600px;
   display: flex;
@@ -110,6 +117,10 @@ input{
     width: 590px;
     padding: 0px 20px;
   }
+  .show-password-btn{
+    width: 590px;
+    padding: 0px 20px;
+  }
   label{
     min-width: 120px;
     font-size: 24px;
@@ -156,6 +167,10 @@ input{
     flex-direction: column;
   }
   .form-group-btn{
+    width: 320px;
+    padding: 0px 20px;
+  }
+  .show-password-btn{
     width: 320px;
     padding: 0px 20px;
   }
