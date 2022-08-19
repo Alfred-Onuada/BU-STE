@@ -65,15 +65,6 @@ body{
   height: 100%;
   width: 100%;
 }
-.end-eval, .start-eval{
-  color: white;
-}
-.end-eval{
-  background-color: red;
-}
-.start-eval{
-  background-color: green;
-}
 .evaluation-details{
   margin: 15px 0px;
 }

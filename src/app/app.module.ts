@@ -32,6 +32,7 @@ import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { MatListModule } from '@angular/material/list';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
     CompletionDialogComponent,
     DeleteConfirmationDialogComponent,
     EditDialogComponent,
-    AddDialogComponent
+    AddDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,8 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
     HttpClientModule,
     MatProgressBarModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

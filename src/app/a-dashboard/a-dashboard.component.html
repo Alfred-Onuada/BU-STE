@@ -11,7 +11,7 @@
         <li (click)="switch('update')">
           <div class="sidenav-options">
             <fa-icon class="icon" [icon]="faUpdate"></fa-icon>
-            <h4 class="title">Edit Sections</h4>
+            <h4 class="title">Manage Sections</h4>
           </div>
         </li>
         <li (click)="switch('reports')">
@@ -65,12 +65,12 @@
               <h3 class="semester-title">{{semester.title}}</h3>
             </div>
             <div class="col-md-6">
-              <button mat-raised-button [ngClass]="semester.evaluationIsActive ? 'end-eval' : 'start-eval'" 
-                (click)="evaluationAction(semester.id - 1)">{{semester.evaluationIsActive ? 'End Evaluation' : 'Start Evaluation'}}</button>
+              <mat-slide-toggle [aria-label]="semester.title" [checked]="semester.evaluationIsActive"
+                (change)="evaluationAction(semester.id - 1)" color="primary"></mat-slide-toggle>
             </div>
           </div>
         </div>
-  
+        
         <div class="recent-evaluations">
           <h1 class="title">Recent Evaluations</h1>
           <table mat-table [dataSource]="recentEvaluations">
